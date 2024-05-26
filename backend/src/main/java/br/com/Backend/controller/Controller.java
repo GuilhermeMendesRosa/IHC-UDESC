@@ -18,7 +18,13 @@ public class Controller {
 
     @PostMapping("/generate")
     public ResponseEntity generateEmpathyMap(@RequestBody String requestData) {
-        String message = MessageFormat.format("Com base nesse JSON: {0} com pergunt sobre os 6 seçoes do mapa de empatia, devolva um mapa de empatia em json", requestData);
+        String message = MessageFormat.format("""
+                Eu tenho este JSON com perguntas: 
+                {0}
+                    
+                Com base neste JSON com as perguntas e respostas, retorne um mapa de empatia em um JSON com estes campos: O que ele(a) vê?, O que ele(a) ouve?, O que ele(a) pensa e sente?, O que ele(a) fala e faz?, Quais são suas dores? e Quais são seus ganhos?
+                """, requestData);
+
         String response = chatClient.call(message);
 
         return ResponseEntity.ok()
