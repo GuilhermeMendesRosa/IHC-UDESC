@@ -1,5 +1,6 @@
 package br.com.Backend.controller;
 
+import org.json.JSONObject;
 import org.springframework.ai.openai.OpenAiChatClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,7 +20,7 @@ public class Controller {
     @PostMapping("/generate")
     public ResponseEntity generateEmpathyMap(@RequestBody String requestData) {
         String message = MessageFormat.format("""
-                Você vai me ajudar a montar um mapa de empatia no formato JSON contendo as seguintes chaves:
+                Você vai me ajudar a montar um mapa de empatia contendo as seguintes chaves:
                 - O que ele(a) vê?
                 - O que ele(a) ouve?
                 - O que ele(a) pensa e sente?
@@ -34,14 +35,18 @@ public class Controller {
 
                 {0}
                         
-                Com base nesse JSON com perguntas e respostas, por favor, retorne um mapa de empatia detalhado e coeso.
+                Com base nesse JSON com perguntas e respostas, por favor, retorne um mapa de empatia detalhado e coeso, faça algo realmente bem completo. 
+                Não só copie e cole o que eu mandei.
                 """, requestData);
 
 
-        String response = chatClient.call(message);
+        String value = chatClient.call(message);
+
+        JSONObject response = new JSONObject();
+        response.put("value", value);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(response);
+                .body(response.toString());
     }
 }

@@ -97,9 +97,7 @@ export class WizardComponent {
     const url = 'http://localhost:8080/generate';
     this.http.post(url, this.questionsAndAnswers).subscribe(
       (response: any) => {
-        console.log(response)
-        this.empathyMap = JSON.stringify(response);
-        console.log('Resposta enviada com sucesso', response);
+        this.empathyMap = response.value;
       },
       (error: any) => {
         console.error('Erro ao enviar a resposta', error);
