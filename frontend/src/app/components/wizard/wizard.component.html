@@ -1,16 +1,14 @@
 <div class="po-m-5">
 
   <po-stepper>
-        <po-step p-label="O que ele(a) vê?">
-          <form #form1="ngForm">
-            <po-textarea name="see1" [(ngModel)]="questionsAndAnswers.session1.see1.answer"
-                         p-label="{{questionsAndAnswers.session1.see1.question}}"></po-textarea>
-            <po-textarea name="see2" [(ngModel)]="questionsAndAnswers.session1.see2.answer"
-                         p-label="{{questionsAndAnswers.session1.see2.question}}"></po-textarea>
-            <po-textarea name="see3" [(ngModel)]="questionsAndAnswers.session1.see3.answer"
-                         p-label="{{questionsAndAnswers.session1.see3.question}}"></po-textarea>
-          </form>
-        </po-step>
+    <po-step p-label="O que ele(a) vê?">
+      <form #form1="ngForm">
+        <po-textarea name="see1" [(ngModel)]="questionsAndAnswers.session1.see1.answer"
+                     p-label="{{questionsAndAnswers.session1.see1.question}}"></po-textarea>
+        <po-textarea name="see2" [(ngModel)]="questionsAndAnswers.session1.see2.answer"
+                     p-label="{{questionsAndAnswers.session1.see2.question}}"></po-textarea>
+      </form>
+    </po-step>
 
     <po-step p-label="O que ele(a) ouve?">
       <form #form2="ngForm">
@@ -18,8 +16,6 @@
                      p-label="{{questionsAndAnswers.session2.hear1.question}}"></po-textarea>
         <po-textarea name="hear2" [(ngModel)]="questionsAndAnswers.session2.hear2.answer"
                      p-label="{{questionsAndAnswers.session2.hear2.question}}"></po-textarea>
-        <po-textarea name="hear3" [(ngModel)]="questionsAndAnswers.session2.hear3.answer"
-                     p-label="{{questionsAndAnswers.session2.hear3.question}}"></po-textarea>
       </form>
     </po-step>
 
@@ -29,8 +25,6 @@
                      p-label="{{questionsAndAnswers.session3.thinkFeel1.question}}"></po-textarea>
         <po-textarea name="thinkFeel2" [(ngModel)]="questionsAndAnswers.session3.thinkFeel2.answer"
                      p-label="{{questionsAndAnswers.session3.thinkFeel2.question}}"></po-textarea>
-        <po-textarea name="thinkFeel3" [(ngModel)]="questionsAndAnswers.session3.thinkFeel3.answer"
-                     p-label="{{questionsAndAnswers.session3.thinkFeel3.question}}"></po-textarea>
       </form>
     </po-step>
 
@@ -40,8 +34,6 @@
                      p-label="{{questionsAndAnswers.session4.sayDo1.question}}"></po-textarea>
         <po-textarea name="sayDo2" [(ngModel)]="questionsAndAnswers.session4.sayDo2.answer"
                      p-label="{{questionsAndAnswers.session4.sayDo2.question}}"></po-textarea>
-        <po-textarea name="sayDo3" [(ngModel)]="questionsAndAnswers.session4.sayDo3.answer"
-                     p-label="{{questionsAndAnswers.session4.sayDo3.question}}"></po-textarea>
       </form>
     </po-step>
 
@@ -51,8 +43,6 @@
                      p-label="{{questionsAndAnswers.session5.pain1.question}}"></po-textarea>
         <po-textarea name="pain2" [(ngModel)]="questionsAndAnswers.session5.pain2.answer"
                      p-label="{{questionsAndAnswers.session5.pain2.question}}"></po-textarea>
-        <po-textarea name="pain3" [(ngModel)]="questionsAndAnswers.session5.pain3.answer"
-                     p-label="{{questionsAndAnswers.session5.pain3.question}}"></po-textarea>
       </form>
     </po-step>
 
@@ -62,13 +52,12 @@
                      p-label="{{questionsAndAnswers.session6.gain1.question}}"></po-textarea>
         <po-textarea name="gain2" [(ngModel)]="questionsAndAnswers.session6.gain2.answer"
                      p-label="{{questionsAndAnswers.session6.gain2.question}}"></po-textarea>
-        <po-textarea name="gain3" [(ngModel)]="questionsAndAnswers.session6.gain3.answer"
-                     p-label="{{questionsAndAnswers.session6.gain3.question}}"></po-textarea>
       </form>
     </po-step>
 
     <po-step p-label="Finalizar">
-      <po-textarea class="po-sm-12" name="empatyMap" [(ngModel)]="empathyMap" p-label="Mapa de Empatia Gerado"></po-textarea>
+      <po-textarea class="po-sm-12" name="empatyMap" [(ngModel)]="empathyMap"
+                   p-label="Mapa de Empatia Gerado"></po-textarea>
 
       <po-button p-label="Gerar Mapa de Empatia" (p-click)="submitAnswers()"></po-button>
     </po-step>
