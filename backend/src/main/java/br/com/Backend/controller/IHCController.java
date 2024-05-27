@@ -16,8 +16,8 @@ public class IHCController {
     private IHCService service;
 
     @PostMapping("/generate")
-    public ResponseEntity generateEmpathyMap(@RequestBody String requestData) {
-        JSONObject response = this.service.generateEmpathyMap(requestData);
+    public ResponseEntity generateEmpathyMap(@RequestBody String questionsAndAnswers) {
+        JSONObject response = this.service.generateEmpathyMap(questionsAndAnswers);
 
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(response.toString());
     }
