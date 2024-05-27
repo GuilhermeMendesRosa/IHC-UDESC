@@ -1,24 +1,20 @@
-package br.com.Backend.controller;
+package br.com.Backend.service;
 
 import org.json.JSONObject;
 import org.springframework.ai.openai.OpenAiChatClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
 
-@RestController
-public class Controller {
+
+@Service
+public class IHCService {
 
     @Autowired
     private OpenAiChatClient chatClient;
 
-    @PostMapping("/generate")
-    public ResponseEntity generateEmpathyMap(@RequestBody String requestData) {
+    public JSONObject generateEmpathyMap(String requestData) {
         String message = MessageFormat.format("""
                 Você vai me ajudar a montar um mapa de empatia contendo as seguintes chaves:
                 - O que ele(a) vê?
@@ -40,13 +36,11 @@ public class Controller {
                 """, requestData);
 
 
-        String value = chatClient.call(message);
+        String value = this.chatClient.call(message);
 
         JSONObject response = new JSONObject();
         response.put("value", value);
-
-        return ResponseEntity.ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(response.toString());
+        return response;
     }
+
 }
