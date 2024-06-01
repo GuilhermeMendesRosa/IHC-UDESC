@@ -67,6 +67,8 @@ export class FirstWizardComponent {
   };
 
   public empathyMap: string | null = "";
+  public loading: boolean = false;
+
   private openai: OpenAI;
 
   constructor(private router: Router) {
@@ -77,6 +79,7 @@ export class FirstWizardComponent {
   }
 
   async submitFirstAswers() {
+    this.loading = true;
     let prompt: string = this.generateFirstPrompt(JSON.stringify(this.questionsAndAnswers));
 
     let response = await this.openai.chat.completions.create({
@@ -85,9 +88,9 @@ export class FirstWizardComponent {
     });
 
     this.appendQuestionsAndAnswers(response);
-    this.router.navigateByUrl('/second-wizard', { state: { questionsAndAnswers: this.questionsAndAnswers } });
 
-    console.log(this.questionsAndAnswers);
+    this.loading = false;
+    this.router.navigateByUrl('/second-wizard', {state: {questionsAndAnswers: this.questionsAndAnswers}});
   }
 
   private appendQuestionsAndAnswers(response: ChatCompletion) {

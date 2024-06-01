@@ -1,22 +1,12 @@
-<div class="po-m-5">
+<po-page-default p-title="Vídeo">
   <div class="container">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/w8byn7e9T00?si=3PgpJ5uoRLHN36io"
+    <iframe width="840" height="472,5" src="https://www.youtube.com/embed/w8byn7e9T00?si=3PgpJ5uoRLHN36io"
             title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <br>
+
     <po-button p-label="Continuar" (p-click)="goToWizard()"></po-button>
   </div>
-
-  <style>
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 5px;
-    }
-
-    iframe {
-      margin-bottom: 10px;
-    }
-  </style>
-</div>
+</po-page-default>

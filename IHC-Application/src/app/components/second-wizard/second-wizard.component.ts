@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import OpenAI from "openai";
 import {Router} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {PoButtonModule, PoFieldModule, PoStepperModule} from "@po-ui/ng-components";
+import {PoButtonModule, PoFieldModule, PoLoadingModule, PoPageModule, PoStepperModule} from "@po-ui/ng-components";
 
 @Component({
   selector: 'app-second-wizard',
@@ -13,16 +13,20 @@ import {PoButtonModule, PoFieldModule, PoStepperModule} from "@po-ui/ng-componen
     PoButtonModule,
     PoFieldModule,
     PoStepperModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PoPageModule,
+    PoLoadingModule
   ],
   templateUrl: './second-wizard.component.html',
   styleUrl: './second-wizard.component.css'
 })
 export class SecondWizardComponent implements OnInit {
 
-  private openai: OpenAI;
   public questionsAndAnswers: any;
   public empathyMap: string | null = "";
+  public loading: boolean = false;
+
+  private openai: OpenAI;
 
   constructor(private http: HttpClient, private router: Router) {
     this.openai = new OpenAI({
@@ -35,11 +39,11 @@ export class SecondWizardComponent implements OnInit {
     if (history.state.questionsAndAnswers) {
       this.questionsAndAnswers = history.state.questionsAndAnswers;
     }
-
-    console.log(this.questionsAndAnswers);
   }
 
   async submitFinalAnswers() {
+    this.loading = true;
+
     let prompt: string = this.generateFinalPrompt(JSON.stringify(this.questionsAndAnswers));
     let response = await this.openai.chat.completions.create({
       messages: [{role: "system", content: prompt}],
@@ -47,6 +51,7 @@ export class SecondWizardComponent implements OnInit {
     });
 
     this.empathyMap = response.choices[0].message.content;
+    this.loading = false;
   }
 
   private generateFinalPrompt(message: string): string {

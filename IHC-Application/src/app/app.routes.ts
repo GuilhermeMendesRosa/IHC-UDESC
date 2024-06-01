@@ -4,6 +4,7 @@ import {SecondWizardComponent} from "./components/second-wizard/second-wizard.co
 import {VideoComponent} from "./components/video/video.component";
 
 export const routes: Routes = [
+  {path: '', redirectTo: 'video', pathMatch: 'full'},
   {path: 'video', component: VideoComponent},
   {path: 'first-wizard', component: FirstWizardComponent},
   {path: 'second-wizard', component: SecondWizardComponent}

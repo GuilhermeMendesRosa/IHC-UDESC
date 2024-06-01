@@ -1,4 +1,4 @@
-<div class="po-m-5">
+<po-page-default p-title="Segunda Etapa">
 
   <po-stepper>
     <po-step p-label="Quais são suas dores?">
@@ -26,4 +26,8 @@
       <po-button p-label="Gerar Mapa de Empatia" (p-click)="submitFinalAnswers()"></po-button>
     </po-step>
   </po-stepper>
+</po-page-default>
+
+<div>
+  <po-loading-overlay [hidden]="!loading"></po-loading-overlay>
 </div>

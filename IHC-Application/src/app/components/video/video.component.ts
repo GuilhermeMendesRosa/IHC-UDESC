@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {PoButtonModule, PoFieldModule, PoStepperModule} from "@po-ui/ng-components";
+import {PoButtonModule, PoContainerModule, PoFieldModule, PoPageModule, PoStepperModule} from "@po-ui/ng-components";
 import {Router} from "@angular/router";
 
 @Component({
@@ -11,7 +11,9 @@ import {Router} from "@angular/router";
     PoButtonModule,
     PoFieldModule,
     PoStepperModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PoPageModule,
+    PoContainerModule
   ],
   templateUrl: './video.component.html',
   styleUrl: './video.component.css'

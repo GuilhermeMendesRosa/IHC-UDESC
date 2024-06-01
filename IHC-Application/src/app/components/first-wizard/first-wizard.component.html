@@ -1,4 +1,4 @@
-<div class="po-m-5">
+<po-page-default p-title="Primeira Etapa">
 
   <po-stepper>
     <po-step p-label="O que ele(a) vê?">
@@ -38,7 +38,11 @@
     </po-step>
 
     <po-step p-label="Continuar">
-      <po-button p-label="Continuar" (p-click)="submitFirstAswers()"></po-button>
+      <po-button p-label="Continuar" (p-click)="submitFirstAswers()" class="button"></po-button>
     </po-step>
   </po-stepper>
+</po-page-default>
+
+<div>
+  <po-loading-overlay [hidden]="!loading"></po-loading-overlay>
 </div>
