@@ -3,63 +3,63 @@
   <po-stepper>
     <po-step p-label="O que ele(a) vê?">
       <form #form1="ngForm">
-        <po-textarea name="see1" [(ngModel)]="questionsAndAnswers.session1.see1.answer"
-                     p-label="{{questionsAndAnswers.session1.see1.question}}"></po-textarea>
-        <po-textarea name="see2" [(ngModel)]="questionsAndAnswers.session1.see2.answer"
-                     p-label="{{questionsAndAnswers.session1.see2.question}}"></po-textarea>
+        <po-textarea name="see1" [(ngModel)]="firstQuestionsAndAnswers.session1.see1.answer"
+                     p-label="{{firstQuestionsAndAnswers.session1.see1.question}}"></po-textarea>
+        <po-textarea name="see2" [(ngModel)]="firstQuestionsAndAnswers.session1.see2.answer"
+                     p-label="{{firstQuestionsAndAnswers.session1.see2.question}}"></po-textarea>
       </form>
     </po-step>
 
     <po-step p-label="O que ele(a) ouve?">
       <form #form2="ngForm">
-        <po-textarea name="hear1" [(ngModel)]="questionsAndAnswers.session2.hear1.answer"
-                     p-label="{{questionsAndAnswers.session2.hear1.question}}"></po-textarea>
-        <po-textarea name="hear2" [(ngModel)]="questionsAndAnswers.session2.hear2.answer"
-                     p-label="{{questionsAndAnswers.session2.hear2.question}}"></po-textarea>
+        <po-textarea name="hear1" [(ngModel)]="firstQuestionsAndAnswers.session2.hear1.answer"
+                     p-label="{{firstQuestionsAndAnswers.session2.hear1.question}}"></po-textarea>
+        <po-textarea name="hear2" [(ngModel)]="firstQuestionsAndAnswers.session2.hear2.answer"
+                     p-label="{{firstQuestionsAndAnswers.session2.hear2.question}}"></po-textarea>
       </form>
     </po-step>
 
     <po-step p-label="O que ele(a) pensa e sente?">
       <form #form3="ngForm">
-        <po-textarea name="thinkFeel1" [(ngModel)]="questionsAndAnswers.session3.thinkFeel1.answer"
-                     p-label="{{questionsAndAnswers.session3.thinkFeel1.question}}"></po-textarea>
-        <po-textarea name="thinkFeel2" [(ngModel)]="questionsAndAnswers.session3.thinkFeel2.answer"
-                     p-label="{{questionsAndAnswers.session3.thinkFeel2.question}}"></po-textarea>
+        <po-textarea name="thinkFeel1" [(ngModel)]="firstQuestionsAndAnswers.session3.thinkFeel1.answer"
+                     p-label="{{firstQuestionsAndAnswers.session3.thinkFeel1.question}}"></po-textarea>
+        <po-textarea name="thinkFeel2" [(ngModel)]="firstQuestionsAndAnswers.session3.thinkFeel2.answer"
+                     p-label="{{firstQuestionsAndAnswers.session3.thinkFeel2.question}}"></po-textarea>
       </form>
     </po-step>
 
     <po-step p-label="O que ele(a) fala e faz?">
       <form #form4="ngForm">
-        <po-textarea name="sayDo1" [(ngModel)]="questionsAndAnswers.session4.sayDo1.answer"
-                     p-label="{{questionsAndAnswers.session4.sayDo1.question}}"></po-textarea>
-        <po-textarea name="sayDo2" [(ngModel)]="questionsAndAnswers.session4.sayDo2.answer"
-                     p-label="{{questionsAndAnswers.session4.sayDo2.question}}"></po-textarea>
+        <po-textarea name="sayDo1" [(ngModel)]="firstQuestionsAndAnswers.session4.sayDo1.answer"
+                     p-label="{{firstQuestionsAndAnswers.session4.sayDo1.question}}"></po-textarea>
+        <po-textarea name="sayDo2" [(ngModel)]="firstQuestionsAndAnswers.session4.sayDo2.answer"
+                     p-label="{{firstQuestionsAndAnswers.session4.sayDo2.question}}"></po-textarea>
       </form>
     </po-step>
 
-    <po-step p-label="Quais são suas dores?">
-      <form #form5="ngForm">
-        <po-textarea name="pain1" [(ngModel)]="questionsAndAnswers.session5.pain1.answer"
-                     p-label="{{questionsAndAnswers.session5.pain1.question}}"></po-textarea>
-        <po-textarea name="pain2" [(ngModel)]="questionsAndAnswers.session5.pain2.answer"
-                     p-label="{{questionsAndAnswers.session5.pain2.question}}"></po-textarea>
-      </form>
-    </po-step>
+<!--    <po-step p-label="Quais são suas dores?">-->
+<!--      <form #form5="ngForm">-->
+<!--        <po-textarea name="pain1" [(ngModel)]="questionsAndAnswers.session5.pain1.answer"-->
+<!--                     p-label="{{questionsAndAnswers.session5.pain1.question}}"></po-textarea>-->
+<!--        <po-textarea name="pain2" [(ngModel)]="questionsAndAnswers.session5.pain2.answer"-->
+<!--                     p-label="{{questionsAndAnswers.session5.pain2.question}}"></po-textarea>-->
+<!--      </form>-->
+<!--    </po-step>-->
 
-    <po-step p-label="Quais são seus ganhos?">
-      <form #form6="ngForm">
-        <po-textarea name="gain1" [(ngModel)]="questionsAndAnswers.session6.gain1.answer"
-                     p-label="{{questionsAndAnswers.session6.gain1.question}}"></po-textarea>
-        <po-textarea name="gain2" [(ngModel)]="questionsAndAnswers.session6.gain2.answer"
-                     p-label="{{questionsAndAnswers.session6.gain2.question}}"></po-textarea>
-      </form>
-    </po-step>
+<!--    <po-step p-label="Quais são seus ganhos?">-->
+<!--      <form #form6="ngForm">-->
+<!--        <po-textarea name="gain1" [(ngModel)]="questionsAndAnswers.session6.gain1.answer"-->
+<!--                     p-label="{{questionsAndAnswers.session6.gain1.question}}"></po-textarea>-->
+<!--        <po-textarea name="gain2" [(ngModel)]="questionsAndAnswers.session6.gain2.answer"-->
+<!--                     p-label="{{questionsAndAnswers.session6.gain2.question}}"></po-textarea>-->
+<!--      </form>-->
+<!--    </po-step>-->
 
     <po-step p-label="Finalizar">
       <po-textarea class="po-sm-12" name="empatyMap" [(ngModel)]="empathyMap"
                    p-label="Mapa de Empatia Gerado" [p-rows]="18"></po-textarea>
 
-      <po-button p-label="Gerar Mapa de Empatia" (p-click)="submitAnswers()"></po-button>
+      <po-button p-label="Gerar Mapa de Empatia" (p-click)="submitFirstAswers()"></po-button>
     </po-step>
   </po-stepper>
 </div>

@@ -17,7 +17,7 @@ import OpenAI from "openai";
   styleUrls: ['./wizard.component.css']
 })
 export class WizardComponent {
-  questionsAndAnswers: any = {
+  firstQuestionsAndAnswers: any = {
     "session1": {
       "theme": "O que ele(a) vê?",
       "see1": {
@@ -61,28 +61,6 @@ export class WizardComponent {
         "question": "Quais são os comportamentos ou ações mais comuns dele(a)?",
         "answer": ""
       }
-    },
-    "session5": {
-      "theme": "Quais são suas dores?",
-      "pain1": {
-        "question": "Quais são os obstáculos que mais impedem ele(a) de alcançar seus objetivos?",
-        "answer": ""
-      },
-      "pain2": {
-        "question": "Que tipo de frustrações ou dificuldades ele(a) enfrenta regularmente?",
-        "answer": ""
-      }
-    },
-    "session6": {
-      "theme": "Quais são seus ganhos?",
-      "gain1": {
-        "question": "O que motiva ele(a) a continuar em frente, mesmo diante de dificuldades?",
-        "answer": ""
-      },
-      "gain2": {
-        "question": "Quais são as pequenas vitórias ou sucessos que ele(a) celebra?",
-        "answer": ""
-      }
     }
   };
 
@@ -96,8 +74,21 @@ export class WizardComponent {
     });
   }
 
-  async submitAnswers() {
-    let prompt: string = this.generateEmpathyMapMessage(JSON.stringify(this.questionsAndAnswers));
+  async submitFirstAswers() {
+    let prompt: string = this.generateFirstPrompt(JSON.stringify(this.firstQuestionsAndAnswers));
+
+    let response = await this.openai.chat.completions.create({
+      messages: [{role: "system", content: prompt}],
+      model: "gpt-3.5-turbo",
+    });
+
+    let dale = response.choices[0].message.content;
+    console.log(dale);
+
+  }
+
+  async submitFinalAnswers() {
+    let prompt: string = this.generateFinalPrompt(JSON.stringify(this.firstQuestionsAndAnswers));
     let response = await this.openai.chat.completions.create({
       messages: [{role: "system", content: prompt}],
       model: "gpt-3.5-turbo",
@@ -107,7 +98,37 @@ export class WizardComponent {
     console.log(response);
   }
 
-  private generateEmpathyMapMessage(requestData: string): string {
+  private generateFirstPrompt(message: string): string {
+    return `
+    Com base em nessas perguntas e respostas sobre os 4 principais quadrantes de um mapa de empatia:
+
+    ${message}
+
+    me devolva um array com 2 objetos nesses moldes:
+    [
+       {
+          "theme":"Quais são suas dores?",
+          "pain1":{
+             "question":""
+          },
+          "pain2":{
+             "question":""
+          }
+       },
+       {
+          "theme":"Quais são seus ganhos?",
+          "gain1":{
+             "question":""
+          },
+          "gain2":{
+             "question":""
+          }
+       }
+    ]
+  `;
+  }
+
+  private generateFinalPrompt(message: string): string {
     return `
     Você vai me ajudar a montar um mapa de empatia contendo as seguintes chaves:
     - O que ele(a) vê?
@@ -122,7 +143,7 @@ export class WizardComponent {
 
     Aqui estão as perguntas e respostas que obtive do usuário:
 
-    ${requestData}
+    ${message}
 
     Com base nesse JSON com perguntas e respostas, por favor, retorne um mapa de empatia detalhado e coeso, faça algo realmente bem completo.
     Não só copie e cole o que eu mandei.
