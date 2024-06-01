@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WizardComponent } from './wizard.component';
+import { FirstWizardComponent } from './first-wizard.component';
 
 describe('WizardComponent', () => {
-  let component: WizardComponent;
-  let fixture: ComponentFixture<WizardComponent>;
+  let component: FirstWizardComponent;
+  let fixture: ComponentFixture<FirstWizardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WizardComponent]
+      imports: [FirstWizardComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(WizardComponent);
+
+    fixture = TestBed.createComponent(FirstWizardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,44 @@
+<div class="po-m-5">
+
+  <po-stepper>
+    <po-step p-label="O que ele(a) vê?">
+      <form #form1="ngForm">
+        <po-textarea name="see1" [(ngModel)]="questionsAndAnswers.session1.see1.answer"
+                     p-label="{{questionsAndAnswers.session1.see1.question}}"></po-textarea>
+        <po-textarea name="see2" [(ngModel)]="questionsAndAnswers.session1.see2.answer"
+                     p-label="{{questionsAndAnswers.session1.see2.question}}"></po-textarea>
+      </form>
+    </po-step>
+
+    <po-step p-label="O que ele(a) ouve?">
+      <form #form2="ngForm">
+        <po-textarea name="hear1" [(ngModel)]="questionsAndAnswers.session2.hear1.answer"
+                     p-label="{{questionsAndAnswers.session2.hear1.question}}"></po-textarea>
+        <po-textarea name="hear2" [(ngModel)]="questionsAndAnswers.session2.hear2.answer"
+                     p-label="{{questionsAndAnswers.session2.hear2.question}}"></po-textarea>
+      </form>
+    </po-step>
+
+    <po-step p-label="O que ele(a) pensa e sente?">
+      <form #form3="ngForm">
+        <po-textarea name="thinkFeel1" [(ngModel)]="questionsAndAnswers.session3.thinkFeel1.answer"
+                     p-label="{{questionsAndAnswers.session3.thinkFeel1.question}}"></po-textarea>
+        <po-textarea name="thinkFeel2" [(ngModel)]="questionsAndAnswers.session3.thinkFeel2.answer"
+                     p-label="{{questionsAndAnswers.session3.thinkFeel2.question}}"></po-textarea>
+      </form>
+    </po-step>
+
+    <po-step p-label="O que ele(a) fala e faz?">
+      <form #form4="ngForm">
+        <po-textarea name="sayDo1" [(ngModel)]="questionsAndAnswers.session4.sayDo1.answer"
+                     p-label="{{questionsAndAnswers.session4.sayDo1.question}}"></po-textarea>
+        <po-textarea name="sayDo2" [(ngModel)]="questionsAndAnswers.session4.sayDo2.answer"
+                     p-label="{{questionsAndAnswers.session4.sayDo2.question}}"></po-textarea>
+      </form>
+    </po-step>
+
+    <po-step p-label="Continuar">
+      <po-button p-label="Continuar" (p-click)="submitFirstAswers()"></po-button>
+    </po-step>
+  </po-stepper>
+</div>

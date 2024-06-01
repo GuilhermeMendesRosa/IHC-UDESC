@@ -1,0 +1,29 @@
+<div class="po-m-5">
+
+  <po-stepper>
+    <po-step p-label="Quais são suas dores?">
+      <form #form5="ngForm">
+        <po-textarea name="pain1" [(ngModel)]="questionsAndAnswers.session5.pain1.answer"
+                     p-label="{{questionsAndAnswers.session5.pain1.question}}"></po-textarea>
+        <po-textarea name="pain2" [(ngModel)]="questionsAndAnswers.session5.pain2.answer"
+                     p-label="{{questionsAndAnswers.session5.pain2.question}}"></po-textarea>
+      </form>
+    </po-step>
+
+    <po-step p-label="Quais são seus ganhos?">
+      <form #form6="ngForm">
+        <po-textarea name="gain1" [(ngModel)]="questionsAndAnswers.session6.gain1.answer"
+                     p-label="{{questionsAndAnswers.session6.gain1.question}}"></po-textarea>
+        <po-textarea name="gain2" [(ngModel)]="questionsAndAnswers.session6.gain2.answer"
+                     p-label="{{questionsAndAnswers.session6.gain2.question}}"></po-textarea>
+      </form>
+    </po-step>
+
+    <po-step p-label="Finalizar">
+      <po-textarea class="po-sm-12" name="empatyMap" [(ngModel)]="empathyMap"
+                   p-label="Mapa de Empatia Gerado" [p-rows]="18"></po-textarea>
+
+      <po-button p-label="Gerar Mapa de Empatia" (p-click)="submitFinalAnswers()"></po-button>
+    </po-step>
+  </po-stepper>
+</div>

@@ -1,23 +1,25 @@
 import {Component} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {PoFieldModule, PoModule, PoStepperModule} from '@po-ui/ng-components';
 import {FormsModule} from "@angular/forms";
 import OpenAI from "openai";
+import {Router} from "@angular/router";
+import {Chat} from "openai/resources";
+import ChatCompletion = Chat.ChatCompletion;
 
 @Component({
-  selector: 'app-wizard',
+  selector: 'app-first-wizard',
   standalone: true,
-  templateUrl: './wizard.component.html',
+  templateUrl: './first-wizard.component.html',
   imports: [
     PoStepperModule,
     PoFieldModule,
     FormsModule,
     PoModule
   ],
-  styleUrls: ['./wizard.component.css']
+  styleUrls: ['./first-wizard.component.css']
 })
-export class WizardComponent {
-  firstQuestionsAndAnswers: any = {
+export class FirstWizardComponent {
+  questionsAndAnswers: any = {
     "session1": {
       "theme": "O que ele(a) vê?",
       "see1": {
@@ -67,7 +69,7 @@ export class WizardComponent {
   public empathyMap: string | null = "";
   private openai: OpenAI;
 
-  constructor(private http: HttpClient) {
+  constructor(private router: Router) {
     this.openai = new OpenAI({
       apiKey: '',
       dangerouslyAllowBrowser: true
@@ -75,32 +77,28 @@ export class WizardComponent {
   }
 
   async submitFirstAswers() {
-    let prompt: string = this.generateFirstPrompt(JSON.stringify(this.firstQuestionsAndAnswers));
+    let prompt: string = this.generateFirstPrompt(JSON.stringify(this.questionsAndAnswers));
 
     let response = await this.openai.chat.completions.create({
       messages: [{role: "system", content: prompt}],
-      model: "gpt-3.5-turbo",
+      model: "gpt-4",
     });
 
-    let dale = response.choices[0].message.content;
-    console.log(dale);
+    this.appendQuestionsAndAnswers(response);
+    this.router.navigateByUrl('/second-wizard', { state: { questionsAndAnswers: this.questionsAndAnswers } });
 
+    console.log(this.questionsAndAnswers);
   }
 
-  async submitFinalAnswers() {
-    let prompt: string = this.generateFinalPrompt(JSON.stringify(this.firstQuestionsAndAnswers));
-    let response = await this.openai.chat.completions.create({
-      messages: [{role: "system", content: prompt}],
-      model: "gpt-3.5-turbo",
-    });
-
-    this.empathyMap = response.choices[0].message.content;
-    console.log(response);
+  private appendQuestionsAndAnswers(response: ChatCompletion) {
+    let objectsArray: any[] = JSON.parse(<string>response.choices[0].message.content);
+    this.questionsAndAnswers.session5 = objectsArray[0];
+    this.questionsAndAnswers.session6 = objectsArray[1];
   }
 
   private generateFirstPrompt(message: string): string {
     return `
-    Com base em nessas perguntas e respostas sobre os 4 principais quadrantes de um mapa de empatia:
+    Com base nessas perguntas e respostas sobre os 4 principais quadrantes de um mapa de empatia:
 
     ${message}
 
@@ -125,28 +123,8 @@ export class WizardComponent {
           }
        }
     ]
-  `;
-  }
 
-  private generateFinalPrompt(message: string): string {
-    return `
-    Você vai me ajudar a montar um mapa de empatia contendo as seguintes chaves:
-    - O que ele(a) vê?
-    - O que ele(a) ouve?
-    - O que ele(a) pensa e sente?
-    - O que ele(a) fala e faz?
-    - Quais são suas dores?
-    - Quais são seus ganhos?
-
-    Eu fiz algumas perguntas para o meu usuário relacionadas a essas chaves. Com base nas respostas fornecidas, quero que você gere o mapa de empatia.
-    Para cada chave, elabore um texto interpretando as respostas para preencher o mapa de empatia.
-
-    Aqui estão as perguntas e respostas que obtive do usuário:
-
-    ${message}
-
-    Com base nesse JSON com perguntas e respostas, por favor, retorne um mapa de empatia detalhado e coeso, faça algo realmente bem completo.
-    Não só copie e cole o que eu mandei.
+    PREENCHA OS CAMPOS question COM O QUE VOCÊ GEROU COM BASE NAS PERGUNTAS E RESPOSTAS ANTERIORES, TENHA CERTEZA QUE NUNCA VIRÁ VAZIO!
   `;
   }
 

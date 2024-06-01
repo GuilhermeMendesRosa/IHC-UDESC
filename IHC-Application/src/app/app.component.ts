@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {WizardComponent} from "./components/wizard/wizard.component";
+import {FirstWizardComponent} from "./components/first-wizard/first-wizard.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, WizardComponent],
+  imports: [RouterOutlet, FirstWizardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
