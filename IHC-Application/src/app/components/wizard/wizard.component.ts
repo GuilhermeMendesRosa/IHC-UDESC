@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {PoFieldModule, PoModule, PoStepperModule, PoStepperStatus} from '@po-ui/ng-components';
+import {PoFieldModule, PoModule, PoStepperModule} from '@po-ui/ng-components';
 import {FormsModule} from "@angular/forms";
+import OpenAI from "openai";
 
 @Component({
   selector: 'app-wizard',
@@ -84,25 +85,48 @@ export class WizardComponent {
       }
     }
   };
-  empathyMap: string = "";
+
+  public empathyMap: string | null = "";
+  private openai: OpenAI;
 
   constructor(private http: HttpClient) {
+    this.openai = new OpenAI({
+      apiKey: '',
+      dangerouslyAllowBrowser: true
+    });
   }
 
-  onStepChange(event: PoStepperStatus) {
-    console.log('Current step:', event);
+  async submitAnswers() {
+    let prompt: string = this.generateEmpathyMapMessage(JSON.stringify(this.questionsAndAnswers));
+    let response = await this.openai.chat.completions.create({
+      messages: [{role: "system", content: prompt}],
+      model: "gpt-3.5-turbo",
+    });
+
+    this.empathyMap = response.choices[0].message.content;
+    console.log(response);
   }
 
-  submitAnswers() {
-    const url = 'http://localhost:8080/generate';
-    this.http.post(url, this.questionsAndAnswers).subscribe(
-      (response: any) => {
-        this.empathyMap = response.value;
-      },
-      (error: any) => {
-        console.error('Erro ao enviar a resposta', error);
-      }
-    );
+  private generateEmpathyMapMessage(requestData: string): string {
+    return `
+    Você vai me ajudar a montar um mapa de empatia contendo as seguintes chaves:
+    - O que ele(a) vê?
+    - O que ele(a) ouve?
+    - O que ele(a) pensa e sente?
+    - O que ele(a) fala e faz?
+    - Quais são suas dores?
+    - Quais são seus ganhos?
+
+    Eu fiz algumas perguntas para o meu usuário relacionadas a essas chaves. Com base nas respostas fornecidas, quero que você gere o mapa de empatia.
+    Para cada chave, elabore um texto interpretando as respostas para preencher o mapa de empatia.
+
+    Aqui estão as perguntas e respostas que obtive do usuário:
+
+    ${requestData}
+
+    Com base nesse JSON com perguntas e respostas, por favor, retorne um mapa de empatia detalhado e coeso, faça algo realmente bem completo.
+    Não só copie e cole o que eu mandei.
+  `;
   }
 
 }

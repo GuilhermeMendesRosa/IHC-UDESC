@@ -10,5 +10,5 @@ import {WizardComponent} from "./components/wizard/wizard.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'IHC-Application';
 }
