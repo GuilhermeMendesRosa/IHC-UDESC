@@ -20,6 +20,13 @@ import ChatCompletion = Chat.ChatCompletion;
 })
 export class FirstWizardComponent {
   questionsAndAnswers: any = {
+    "session0": {
+      "theme": "Contextualização",
+      "context": {
+        "question": "Para começar, qual é o principal objetivo do seu mapa de empatia? Você está planejando vender um produto, desenvolver um serviço ou solucionar um problema específico?",
+        "answer": ""
+      }
+    },
     "session1": {
       "theme": "O que ele(a) vê?",
       "see1": {

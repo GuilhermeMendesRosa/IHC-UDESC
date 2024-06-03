@@ -1,6 +1,12 @@
 <po-page-default p-title="Primeira Etapa">
 
   <po-stepper>
+    <po-step p-label="Contextualização">
+      <form #form1="ngForm">
+        <po-textarea name="see1" [(ngModel)]="questionsAndAnswers.session0.context.answer"
+                     p-label="{{questionsAndAnswers.session0.context.question}}"></po-textarea>
+      </form>
+    </po-step>
     <po-step p-label="O que ele(a) vê?">
       <form #form1="ngForm">
         <po-textarea name="see1" [(ngModel)]="questionsAndAnswers.session1.see1.answer"
