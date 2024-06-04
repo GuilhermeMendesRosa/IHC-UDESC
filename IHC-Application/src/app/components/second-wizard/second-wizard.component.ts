@@ -3,7 +3,15 @@ import {HttpClient} from "@angular/common/http";
 import OpenAI from "openai";
 import {Router} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {PoButtonModule, PoFieldModule, PoLoadingModule, PoPageModule, PoStepperModule} from "@po-ui/ng-components";
+import {
+  PoButtonModule,
+  PoContainerModule,
+  PoFieldModule,
+  PoLoadingModule,
+  PoPageModule,
+  PoStepperModule,
+  PoWidgetModule
+} from "@po-ui/ng-components";
 
 @Component({
   selector: 'app-second-wizard',
@@ -15,7 +23,9 @@ import {PoButtonModule, PoFieldModule, PoLoadingModule, PoPageModule, PoStepperM
     PoStepperModule,
     ReactiveFormsModule,
     PoPageModule,
-    PoLoadingModule
+    PoLoadingModule,
+    PoWidgetModule,
+    PoContainerModule
   ],
   templateUrl: './second-wizard.component.html',
   styleUrl: './second-wizard.component.css'
@@ -23,8 +33,15 @@ import {PoButtonModule, PoFieldModule, PoLoadingModule, PoPageModule, PoStepperM
 export class SecondWizardComponent implements OnInit {
 
   public questionsAndAnswers: any;
-  public empathyMap: string | null = "";
   public loading: boolean = false;
+  public empathyMap: any = {
+    "see": "SESSAO-DO-MAPA-GERADO",
+    "hear": "SESSAO-DO-MAPA-GERADO",
+    "thinkFeel": "SESSAO-DO-MAPA-GERADO",
+    "sayDo": "SESSAO-DO-MAPA-GERADO",
+    "pain": "SESSAO-DO-MAPA-GERADO",
+    "gain": "SESSAO-DO-MAPA-GERADO"
+  };
 
   private openai: OpenAI;
 
@@ -50,7 +67,7 @@ export class SecondWizardComponent implements OnInit {
       model: "gpt-4",
     });
 
-    this.empathyMap = response.choices[0].message.content;
+    this.empathyMap = JSON.parse(<string>response.choices[0].message.content);
     this.loading = false;
   }
 
@@ -73,6 +90,19 @@ export class SecondWizardComponent implements OnInit {
 
     Com base nesse JSON com perguntas e respostas, por favor, retorne um mapa de empatia detalhado e coeso, faça algo realmente bem completo.
     Não só copie e cole o que eu mandei.
+
+    QUERO QUE ME RETORNE UM JSON SEGUINDO ESSE MODELO:
+
+    {
+        "see": "SESSAO-DO-MAPA-GERADO",
+        "hear": "SESSAO-DO-MAPA-GERADO",
+        "thinkFeel":"SESSAO-DO-MAPA-GERADO",
+        "sayDo": "SESSAO-DO-MAPA-GERADO",
+        "pain": "SESSAO-DO-MAPA-GERADO",
+        "gain": "SESSAO-DO-MAPA-GERADO"
+    }
+
+    tende deixa o campo "SESSAO-DO-MAPA-GERADO" de cada atributo do mesmo tamanho, para náo ter problema de interface
   `;
   }
 

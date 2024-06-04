@@ -20,12 +20,35 @@
     </po-step>
 
     <po-step p-label="Finalizar">
-      <po-textarea class="po-sm-12" name="empatyMap" [(ngModel)]="empathyMap"
-                   p-label="Mapa de Empatia Gerado" [p-rows]="18"></po-textarea>
+      <po-container class="po-lg-12">
+        <po-widget class="po-lg-6 po-mb-1" p-title="O que ele(a) vê?">
+          <div class="po-text-center sample-container-dashboard">{{ empathyMap.see }}</div>
+        </po-widget>
 
+        <po-widget class="po-lg-6 po-mb-1" p-title="O que ele(a) ouve?">
+          <div class="po-text-center sample-container-dashboard">{{ empathyMap.hear }}</div>
+        </po-widget>
+
+        <po-widget class="po-lg-6 po-mb-1" p-title="O que ele(a) pensa e sente?">
+          <div class="po-text-center sample-container-dashboard">{{ empathyMap.thinkFeel }}</div>
+        </po-widget>
+
+        <po-widget class="po-lg-6 po-mb-1" p-title="O que ele(a) fala e faz?">
+          <div class="po-text-center sample-container-dashboard">{{ empathyMap.sayDo }}</div>
+        </po-widget>
+
+        <po-widget class="po-lg-12 po-mb-1" p-title="Quais são suas dores?">
+          <div class="po-text-center sample-container-dashboard">{{ empathyMap.pain }}</div>
+        </po-widget>
+
+        <po-widget class="po-lg-12 po-mb-1" p-title="Quais são seus ganhos?">
+          <div class="po-text-center sample-container-dashboard">{{ empathyMap.gain }}</div>
+        </po-widget>
+      </po-container>
       <po-button p-label="Gerar Mapa de Empatia" (p-click)="submitFinalAnswers()"></po-button>
     </po-step>
   </po-stepper>
+
 </po-page-default>
 
 <div>
