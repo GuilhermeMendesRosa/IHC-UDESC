@@ -50,7 +50,7 @@ export class SecondWizardComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router) {
     this.openai = new OpenAI({
-      apiKey: '',
+      apiKey: <string>localStorage.getItem("apiKey"),
       dangerouslyAllowBrowser: true
     });
   }

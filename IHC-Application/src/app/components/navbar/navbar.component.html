@@ -1,0 +1,15 @@
+<header class="navbar">
+  <po-button
+    class="btn"
+    p-icon="po-icon-settings"
+    p-label="Configurações"
+    (p-click)="modal.open()"
+  ></po-button>
+</header>
+
+<po-modal #modal p-title="Configurações">
+  <po-textarea name="apiKey" [(ngModel)]="apiKey" p-label="OpenAI API Key"></po-textarea>
+  <div class="container">
+    <po-button p-label="Salvar" (p-click)="saveAPIKey()"></po-button>
+  </div>
+</po-modal>
