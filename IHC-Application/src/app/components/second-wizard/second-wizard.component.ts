@@ -12,6 +12,7 @@ import {
   PoStepperModule,
   PoWidgetModule
 } from "@po-ui/ng-components";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-second-wizard',
@@ -25,7 +26,8 @@ import {
     PoPageModule,
     PoLoadingModule,
     PoWidgetModule,
-    PoContainerModule
+    PoContainerModule,
+    NgIf
   ],
   templateUrl: './second-wizard.component.html',
   styleUrl: './second-wizard.component.css'
@@ -44,6 +46,7 @@ export class SecondWizardComponent implements OnInit {
   };
 
   private openai: OpenAI;
+  finished: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {
     this.openai = new OpenAI({
@@ -67,8 +70,9 @@ export class SecondWizardComponent implements OnInit {
       model: "gpt-4",
     });
 
-    this.empathyMap = JSON.parse(<string>response.choices[0].message.content);
     this.loading = false;
+    this.finished = true;
+    this.empathyMap = JSON.parse(<string>response.choices[0].message.content);
   }
 
   private generateFinalPrompt(message: string): string {
@@ -91,7 +95,7 @@ export class SecondWizardComponent implements OnInit {
     Com base nesse JSON com perguntas e respostas, por favor, retorne um mapa de empatia detalhado e coeso, faça algo realmente bem completo.
     Não só copie e cole o que eu mandei.
 
-    QUERO QUE ME RETORNE UM JSON SEGUINDO ESSE MODELO:
+    QUERO QUE ME RETORNE ÚNICA E EXCLUSIVAMENTE (NÃO MANDE NENHUM TEXTO ANTES) UM JSON SEGUINDO ESSE MODELO:
 
     {
         "see": "SESSAO-DO-MAPA-GERADO",
