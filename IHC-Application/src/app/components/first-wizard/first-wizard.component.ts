@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
-import {PoFieldModule, PoModule, PoStepperModule} from '@po-ui/ng-components';
+import {PoFieldModule, PoModule, PoStepComponent, PoStepperModule} from '@po-ui/ng-components';
 import {FormsModule} from "@angular/forms";
 import OpenAI from "openai";
 import {Router} from "@angular/router";
 import {Chat} from "openai/resources";
 import ChatCompletion = Chat.ChatCompletion;
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-first-wizard',
@@ -14,7 +15,8 @@ import ChatCompletion = Chat.ChatCompletion;
     PoStepperModule,
     PoFieldModule,
     FormsModule,
-    PoModule
+    PoModule,
+    NgIf
   ],
   styleUrls: ['./first-wizard.component.css']
 })
@@ -76,7 +78,9 @@ export class FirstWizardComponent {
   public empathyMap: string | null = "";
   public loading: boolean = false;
 
+
   private openai: OpenAI;
+  public currentStep: number = 1;
 
   constructor(private router: Router) {
     this.openai = new OpenAI({
@@ -138,4 +142,7 @@ export class FirstWizardComponent {
   `;
   }
 
+  changeStep($event: number | PoStepComponent) {
+    this.currentStep++;
+  }
 }

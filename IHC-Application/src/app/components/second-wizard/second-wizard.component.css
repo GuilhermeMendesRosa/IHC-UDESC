@@ -4,3 +4,10 @@
   align-items: center;
   margin: 5px;
 }
+
+.button {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}

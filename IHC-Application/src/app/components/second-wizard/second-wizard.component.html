@@ -1,6 +1,7 @@
 <po-page-default p-title="Segunda Etapa">
 
-  <po-stepper>
+  <po-stepper #stepper1
+              (p-change-step)="changeStep1($event)">
     <po-step p-label="Quais são suas dores?">
       <form #form5="ngForm">
         <po-textarea name="pain1" [(ngModel)]="questionsAndAnswers.session5.pain1.answer"
@@ -53,6 +54,8 @@
       </div>
 
     </po-step>
+
+    <po-button *ngIf="!isLast" p-label="Continuar" (p-click)="stepper1.next()" class="button"></po-button>
   </po-stepper>
 
 </po-page-default>

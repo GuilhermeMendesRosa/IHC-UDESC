@@ -9,6 +9,7 @@ import {
   PoFieldModule,
   PoLoadingModule,
   PoPageModule,
+  PoStepComponent,
   PoStepperModule,
   PoWidgetModule
 } from "@po-ui/ng-components";
@@ -47,6 +48,8 @@ export class SecondWizardComponent implements OnInit {
 
   private openai: OpenAI;
   finished: boolean = false;
+  public currentStep1: number = 0;
+  isLast: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {
     this.openai = new OpenAI({
@@ -108,6 +111,15 @@ export class SecondWizardComponent implements OnInit {
 
     tende deixa o campo "SESSAO-DO-MAPA-GERADO" de cada atributo do mesmo tamanho, para náo ter problema de interface
   `;
+  }
+
+  public changeStep1($event: number | PoStepComponent) {
+    this.currentStep1++;
+
+    if (this.currentStep1 >= 3) {
+      this.isLast = true;
+    }
+    console.log(this.currentStep1)
   }
 
 }

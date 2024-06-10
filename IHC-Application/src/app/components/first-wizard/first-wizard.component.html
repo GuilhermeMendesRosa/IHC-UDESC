@@ -1,6 +1,7 @@
 <po-page-default p-title="Primeira Etapa">
 
-  <po-stepper>
+  <po-stepper #stepper
+              (p-change-step)="changeStep($event)">
     <po-step p-label="Contextualização">
       <form #form1="ngForm">
         <po-textarea name="see1" [(ngModel)]="questionsAndAnswers.session0.context.answer"
@@ -43,9 +44,8 @@
       </form>
     </po-step>
 
-    <po-step p-label="Continuar">
-      <po-button p-label="Continuar" (p-click)="submitFirstAswers()" class="button"></po-button>
-    </po-step>
+    <po-button *ngIf="currentStep < 6" p-label="Continuar" (p-click)="stepper.next()" class="button"></po-button>
+    <po-button *ngIf="currentStep == 6" p-label="Continuar" (p-click)="submitFirstAswers()" class="button"></po-button>
   </po-stepper>
 </po-page-default>
 
